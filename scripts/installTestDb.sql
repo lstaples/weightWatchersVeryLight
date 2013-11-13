@@ -46,16 +46,25 @@ CREATE TABLE ingredient(id int primary key identity
                        ,quantity int not null CHECK (quantity >0)
                        ) 
 
-CREATE TABLE foodLog(id int primary key identity
+CREATE TABLE calorieIntakeLogEntry(id int primary key identity
                      ,version int
                      ,dateEaten datetime
-                     ,recipeID int references recipe(id)
-                     ,foodID int references food(id) 
                      ,meal varchar(10) not null
                      ,quantity int not null
-                     ,calories int not null CHECK (calories >0))
+                     ,calories int not null CHECK (calories >0)
+                     ,entryType varchar(20))
+                     
+CREATE TABLE foodLogEntry(id int primary key
+                          ,version int
+                          ,portionID int references portion(id) not null
+                          ,foreign key (id) references calorieIntakeLogEntry(id))
+                          
+CREATE TABLE recipeLogEntry(id int primary key
+                          ,version int
+                          ,recipeID int references recipe(id) not null
+                          ,foreign key (id) references calorieIntakeLogEntry(id))
 
-CREATE TABLE weightLog(id int primary key identity
+CREATE TABLE weightLogEntry(id int primary key identity
                      ,version int 
                      ,dateWeighed datetime
                      ,weight int CHECK (weight >0))
@@ -63,9 +72,12 @@ CREATE TABLE weightLog(id int primary key identity
 GO
 
 CREATE INDEX ix_portion_foodID ON portion (foodID)
+
 CREATE INDEX ix_ingredient_composite ON ingredient (recipeID,portionID)
-CREATE INDEX ix_foodLog_dateEaten ON foodLog (dateEaten)
-CREATE INDEX ix_weightLog_dateWeighed ON weightLog (dateWeighed)
+
+CREATE INDEX ix_calorieIntakeLogEntry_dateEaten ON calorieIntakeLogEntry (dateEaten)
+
+CREATE INDEX ix_weightLog_dateWeighed ON weightLogEntry (dateWeighed)
 
 
                     
