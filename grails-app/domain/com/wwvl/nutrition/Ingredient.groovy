@@ -10,4 +10,9 @@ class Ingredient {
 		calories min: 1
 		quantity min: 1
     }
+
+	static mapping = {
+		recipe column: 'recipeID'
+		portion column: 'portionID'
+	}
 }

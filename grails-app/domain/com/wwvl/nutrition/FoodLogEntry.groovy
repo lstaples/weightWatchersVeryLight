@@ -5,6 +5,6 @@ class FoodLogEntry extends LogEntry{
 	static belongsTo = [portion: Portion]
 
 	static mapping = {
-		discriminator "Food"
+		portion column: 'portionID'
 	}
 }

@@ -16,4 +16,8 @@ class Recipe {
 		name unique: true
     }
 
+	static mapping = {
+		user column: 'userID'
+	}
+
 }

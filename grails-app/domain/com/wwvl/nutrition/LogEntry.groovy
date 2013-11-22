@@ -6,7 +6,6 @@ abstract class LogEntry {
 	Meal meal
 	Integer quantity
 	Integer calories
-	String entryType
 
 	static belongsTo = [user:User]
 
@@ -19,6 +18,7 @@ abstract class LogEntry {
 	static mapping = {
 		autoImport false
 		tablePerHierarchy false
-		discriminator column: "entryType"
+		user column: 'userID'
+		table 'calorieIntakeLogEntry'
 	}
 }

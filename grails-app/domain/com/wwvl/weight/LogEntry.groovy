@@ -12,5 +12,6 @@ class LogEntry {
     }
 	static mapping = {
 		table 'weightLogEntry'
+		user column: 'userID'
 	}
 }

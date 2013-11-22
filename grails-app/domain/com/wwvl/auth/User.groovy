@@ -1,5 +1,8 @@
 package com.wwvl.auth
 
+import com.wwvl.nutrition.*
+import com.wwvl.weight.*
+
 class User {
 
 	transient springSecurityService
@@ -17,6 +20,8 @@ class User {
 		username blank: false, unique: true , size: 1..50
 		password blank: false
 	}
+
+	static hasMany = [foods:Food,recipes:Recipe, intakeLogEntries: com.wwvl.nutrition.LogEntry, weightLogEntries: com.wwvl.weight.LogEntry ]
 
 	static mapping = {
 		password column: '`password`'

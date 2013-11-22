@@ -6,6 +6,6 @@ class RecipeLogEntry extends LogEntry {
 	static belongsTo = [recipe:Recipe]
 
 	static mapping = {
-		discriminator "Recipe"
+		recipe column: 'recipeID'
 	}
 }

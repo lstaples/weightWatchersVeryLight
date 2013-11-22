@@ -11,4 +11,8 @@ class Portion {
 		description size: 1..255
 		calories min: 1
     }
+
+	static mapping = {
+		food column: 'foodID'
+	}
 }
