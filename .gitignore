@@ -17,4 +17,4 @@ stacktrace.log
 /target-eclipse/
 .idea
 *.iml
-DbCredentials.properties
+weightWatchersVeryLight-config.groovy

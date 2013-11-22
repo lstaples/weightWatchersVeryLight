@@ -11,7 +11,12 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-grails.config.locations = ["classpath:dbCredentials.properties"]
+//grails.config.locations = ["classpath:dbCredentials.properties"]
+//Thank you Burt
+grails.config.locations = [
+		"classpath:${appName}-config.groovy",
+		"./${appName}-config.groovy"]
+
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
@@ -115,3 +120,22 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.wwvl.auth.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.wwvl.auth.UserRole'
+grails.plugin.springsecurity.authority.className = 'com.wwvl.auth.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+grails.plugin.springsecurity.rejectIfNoRule = false
+

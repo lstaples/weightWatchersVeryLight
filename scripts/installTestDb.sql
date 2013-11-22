@@ -21,8 +21,28 @@ GO
 USE weightWatchersVeryLight
 GO
 
+                     
+CREATE TABLE users(id int primary key identity
+				  ,version int 
+                  ,username varchar(50)
+                  ,password varchar(1000)
+                  ,enable bit
+                  ,accountExpired bit
+                  ,accountLocked bit
+                  ,passwordExpired bit)
+
+CREATE TABLE roles(id int primary key identity
+				  ,version int
+				  ,authority varchar(100))
+				  
+CREATE TABLE userRole(id int primary key identity
+				      ,version int
+				      ,userID int references users(ID)
+				      ,roleID int references roles(ID))
+
 CREATE TABLE food (id int primary key identity
                    ,version int
+                   ,userID int references users(id)
                    ,name varchar(255) not null
                    )
                    
@@ -34,6 +54,7 @@ CREATE TABLE portion(id int primary key identity
                      
 CREATE TABLE recipe(id int primary key identity
                     ,version int
+                    ,userID int references users(id)
                     ,name varchar(255) not null
                     ,calories int not null CHECK (calories >0)
                     ,servings int not null CHECK (servings >0))
@@ -48,6 +69,7 @@ CREATE TABLE ingredient(id int primary key identity
 
 CREATE TABLE calorieIntakeLogEntry(id int primary key identity
                      ,version int
+                     ,userID int references users(id)
                      ,dateEaten datetime
                      ,meal varchar(10) not null
                      ,quantity int not null
@@ -65,9 +87,11 @@ CREATE TABLE recipeLogEntry(id int primary key
                           ,foreign key (id) references calorieIntakeLogEntry(id))
 
 CREATE TABLE weightLogEntry(id int primary key identity
+					 ,userID int references users(id)
                      ,version int 
                      ,dateWeighed datetime
                      ,weight int CHECK (weight >0))
+
                        
 GO
 

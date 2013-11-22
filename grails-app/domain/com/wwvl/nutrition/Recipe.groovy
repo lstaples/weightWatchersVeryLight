@@ -1,5 +1,6 @@
 package com.wwvl.nutrition
 
+import com.wwvl.auth.User
 class Recipe {
 
 	String name
@@ -7,6 +8,7 @@ class Recipe {
 	Integer servings
 
 	static hasMany = [ingredients: Ingredient, logEntries: RecipeLogEntry]
+	static belongsTo = [user:User]
 
     static constraints = {
 		calories min: 1
