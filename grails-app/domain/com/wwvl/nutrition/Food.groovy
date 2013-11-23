@@ -9,7 +9,7 @@ class Food {
 	static belongsTo = [user:User]
 
     static constraints = {
-		name size: 1..255, unique: true
+		name size: 1..255, unique: ['user'] ,blank: false
     }
 
 	static mapping = {

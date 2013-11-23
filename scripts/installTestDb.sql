@@ -26,7 +26,7 @@ CREATE TABLE users(id int primary key identity
 				  ,version int 
                   ,username varchar(50)
                   ,password varchar(1000)
-                  ,enable bit
+                  ,enabled bit
                   ,accountExpired bit
                   ,accountLocked bit
                   ,passwordExpired bit)
@@ -36,7 +36,6 @@ CREATE TABLE roles(id int primary key identity
 				  ,authority varchar(100))
 				  
 CREATE TABLE userRole(id int primary key identity
-				      ,version int
 				      ,userID int references users(ID)
 				      ,roleID int references roles(ID))
 
@@ -73,8 +72,7 @@ CREATE TABLE calorieIntakeLogEntry(id int primary key identity
                      ,dateEaten datetime
                      ,meal varchar(10) not null
                      ,quantity int not null
-                     ,calories int not null CHECK (calories >0)
-                     ,entryType varchar(20))
+                     ,calories int not null CHECK (calories >0))
                      
 CREATE TABLE foodLogEntry(id int primary key
                           ,version int

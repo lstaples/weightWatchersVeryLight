@@ -2,7 +2,7 @@ package com.wwvl.auth
 
 import spock.lang.*
 
-class RoleSpec extends Specification {
+class RoleIntSpec extends Specification {
 
     def setup() {
     }

@@ -2,7 +2,7 @@ package com.wwvl.auth
 
 import spock.lang.*
 
-class UserSpec extends Specification {
+class UserIntSpec extends Specification {
 
     def setup() {
     }

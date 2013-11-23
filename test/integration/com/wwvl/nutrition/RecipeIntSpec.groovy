@@ -3,7 +3,7 @@ package com.wwvl.nutrition
 import com.wwvl.auth.User
 import spock.lang.*
 
-class RecipeSpec extends Specification {
+class RecipeIntSpec extends Specification {
 
     def setup() {
     }

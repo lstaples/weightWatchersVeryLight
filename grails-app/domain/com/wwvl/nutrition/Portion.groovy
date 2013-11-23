@@ -8,7 +8,7 @@ class Portion {
 	static hasMany = [recipeIngredients: Ingredient, logEntries:FoodLogEntry]
 
     static constraints = {
-		description size: 1..255
+		description size: 1..255, blank: false
 		calories min: 1
     }
 

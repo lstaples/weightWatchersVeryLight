@@ -13,7 +13,7 @@ class Recipe {
     static constraints = {
 		calories min: 1
 		servings  min: 1
-		name unique: true
+		name unique: ['user'] , blank: false, size: 1..255
     }
 
 	static mapping = {

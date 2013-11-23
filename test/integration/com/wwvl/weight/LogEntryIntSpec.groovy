@@ -3,7 +3,7 @@ package com.wwvl.weight
 import com.wwvl.auth.User
 import spock.lang.*
 
-class LogEntrySpec extends Specification {
+class LogEntryIntSpec extends Specification {
 
     def setup() {
     }

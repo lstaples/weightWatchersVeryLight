@@ -12,7 +12,6 @@ abstract class LogEntry {
     static constraints = {
 		quantity min: 1
 		calories min: 1
-		dateEaten unique: true
     }
 
 	static mapping = {
@@ -20,5 +19,10 @@ abstract class LogEntry {
 		tablePerHierarchy false
 		user column: 'userID'
 		table 'calorieIntakeLogEntry'
+	}
+
+	void setDateEaten(Date date){
+		date.clearTime()
+		dateEaten = date
 	}
 }

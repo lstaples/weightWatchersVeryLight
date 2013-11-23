@@ -8,10 +8,15 @@ class LogEntry {
 	static belongsTo = [user: User]
 
     static constraints = {
-		dateWeighed unique: true
+		dateWeighed unique: ['user']
     }
 	static mapping = {
 		table 'weightLogEntry'
 		user column: 'userID'
+	}
+
+	void setDateWeighed(Date date){
+		date.clearTime()
+		dateWeighed = date
 	}
 }
