@@ -1,7 +1,6 @@
 package com.wwvl.auth
 
 import com.wwvl.nutrition.*
-import com.wwvl.weight.*
 
 class User {
 
@@ -13,6 +12,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	Date dateCreated
 
 	static transients = ['springSecurityService']
 

@@ -29,7 +29,8 @@ CREATE TABLE users(id int primary key identity
                   ,enabled bit
                   ,accountExpired bit
                   ,accountLocked bit
-                  ,passwordExpired bit)
+                  ,passwordExpired bit
+                  ,dateCreated datetime)
 
 CREATE TABLE roles(id int primary key identity
 				  ,version int
