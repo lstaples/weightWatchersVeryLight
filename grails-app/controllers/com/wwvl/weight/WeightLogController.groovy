@@ -9,7 +9,7 @@ class WeightLogController {
 	def WeightLogService
 
     def list(ListCommand lc) {
-		User user = User.get(springSecurityService.principal.id)
+		User user = User.load(springSecurityService.principal.id)
 		lc.resolveDates(user)
 		def logEntries = LogEntry.findAllByUserAndDateWeighedGreaterThanEqualsAndDateWeighedLessThanEquals(user,lc.startDate,lc.endDate)
 		render logEntries as JSON
@@ -37,8 +37,10 @@ class WeightLogController {
 	def show(Long id){
 		User user = User.load(springSecurityService.principal.id)
 		def logEntry = LogEntry.findByIdAndUser(id,user)
-		if(!logEntry)
-			response.sendError(404,"Weight log entry not found")
+		if(!logEntry){
+			render (status: 404, text: "Weight Log Entry Not Found")
+			return
+		}
 
 		render logEntry as JSON
 	}
@@ -46,8 +48,10 @@ class WeightLogController {
 	def delete(Long id){
 		User user = User.load(springSecurityService.principal.id)
 		def logEntry = LogEntry.findByIdAndUser(id,user)
-		if(!logEntry)
-			response.sendError(404,"Weight log entry not found")
+		if(!logEntry){
+			render (status: 404, text: "Weight Log Entry Not Found")
+			return
+		}
 		WeightLogService.deleteLog(logEntry)
 		render(status: 204)
 	}
@@ -60,8 +64,10 @@ class WeightLogController {
 		}
 		def user = User.load(springSecurityService.principal.id)
 		def logEntry = LogEntry.findByIdAndUser(logEntryCommand.id,user)
-		if(!logEntry)
-			response.sendError(404,"Weight log entry not found")
+		if(!logEntry){
+			render (status: 404, text: "Weight Log Entry Not Found")
+			return
+		}
 
 		logEntry.properties =  logEntryCommand.getSimpleProperties()
 		if(!WeightLogService.updateLog(logEntry)){
