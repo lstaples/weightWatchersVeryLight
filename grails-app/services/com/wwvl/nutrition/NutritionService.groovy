@@ -39,4 +39,20 @@ class NutritionService {
 		portion.calories = calories
 		portion.validate()
 	}
+
+	Recipe createRecipe(User user, String name, Integer servings){
+		def recipe =  new Recipe(user: user, name: name, servings: servings)
+		recipe.save()
+		recipe
+	}
+
+	void deleteRecipe(Recipe recipe){
+		recipe.delete()
+	}
+
+	void updateRecipe(Recipe recipe, String name, Integer servings){
+		recipe.name = name
+		recipe.servings = servings
+		recipe.validate()
+	}
 }

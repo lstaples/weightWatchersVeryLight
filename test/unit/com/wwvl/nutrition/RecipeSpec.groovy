@@ -60,12 +60,12 @@ class RecipeSpec extends Specification {
 		recipe.validate()
 	}
 
-	void "test calories must be positive int"(){
+	void "test calories must be positive int or 0"(){
 		User user = Mock()
 		def recipe= new Recipe(user: user, name: 'cobb salad',calories: 10,servings: 2)
 
 		when:
-		recipe.calories = 0
+		recipe.calories = -1
 		then:
 		!recipe.validate()
 

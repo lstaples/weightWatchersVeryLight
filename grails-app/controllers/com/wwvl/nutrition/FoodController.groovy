@@ -4,7 +4,7 @@ import com.wwvl.auth.User
 import grails.converters.JSON
 import grails.validation.Validateable
 
-class NutritionController{
+class FoodController {
 
 	def springSecurityService
 	def NutritionService
@@ -66,7 +66,7 @@ class NutritionController{
 			isNotEmpty("recipeIngredients")
 		}
 		if(portions) {
-			render (status: 404, text: "Food cannot be deleted because it belongs to at least 1 recipe")
+			render (status: 400, text: "Food cannot be deleted because it belongs to at least 1 recipe")
 			return
 		}
 
@@ -77,7 +77,7 @@ class NutritionController{
 		}
 
 		if(portions) {
-			render (status: 404, text: "Food cannot be deleted because it belongs to at least 1 log entry")
+			render (status: 400, text: "Food cannot be deleted because it belongs to at least 1 log entry")
 			return
 		}
 		NutritionService.deleteFood(food);
@@ -134,12 +134,12 @@ class NutritionController{
 		}
 
 		if(portion.recipeIngredients) {
-			render (status: 404, text: "Portion cannot be deleted because it belongs to at least 1 recipe")
+			render (status: 400, text: "Portion cannot be deleted because it belongs to at least 1 recipe")
 			return
 		}
 
 		if(portion.logEntries) {
-			render (status: 404, text: "Portion cannot be deleted because it belongs to at least 1 log entry")
+			render (status: 400, text: "Portion cannot be deleted because it belongs to at least 1 log entry")
 			return
 		}
 		NutritionService.deletePortion(portion);

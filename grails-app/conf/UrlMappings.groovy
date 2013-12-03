@@ -15,23 +15,30 @@ class UrlMappings {
 			action = [GET: "show", POST: "update", DELETE: "delete"]
 		}
 
-		"/food"(controller: "Nutrition", parseRequest: true) {
+		"/food"(controller: "Food", parseRequest: true) {
 			action = [GET: "listFood", POST: "createFood"]
 		}
-		"/food/$id"(controller: "Nutrition", parseRequest: true) {
+		"/food/$id"(controller: "Food", parseRequest: true) {
 			action = [GET: "showFood", POST: "updateFood", DELETE: "deleteFood"]
 		}
 
-		"/food/$foodID/portion"(controller: "Nutrition", parseRequest: true) {
+		"/food/$foodID/portion"(controller: "Food", parseRequest: true) {
 			action = [POST: "createPortion"]
 		}
 
-		"/food/$foodID/portion/$id"(controller: "Nutrition", parseRequest: true) {
+		"/food/$foodID/portion/$id"(controller: "Food", parseRequest: true) {
 			action = [POST: "updatePortion", DELETE: "deletePortion"]
 		}
 
-		"/meals"(controller: "Nutrition", parseRequest: true) {
+		"/meals"(controller: "Food", parseRequest: true) {
 			action = [GET: "listMeals"]
+		}
+
+		"/recipe"(controller: "Recipe", parseRequest: true) {
+			action = [GET: "listRecipe", POST: "createRecipe"]
+		}
+		"/recipe/$id"(controller: "Recipe", parseRequest: true) {
+			action = [GET: "showRecipe", POST: "updateRecipe", DELETE: "deleteRecipe"]
 		}
 
         "/"(view:"/index")

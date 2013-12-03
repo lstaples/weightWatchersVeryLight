@@ -5,7 +5,7 @@ class PortionMarshaller {
 
 	void register(){
 		JSON.registerObjectMarshaller(Portion){Portion portion ->
-			return [id: portion.id,description: portion.description,calories: portion.calories, foodID: portion.food.id]
+			return [id: portion.id,description: portion.description,calories: portion.calories, foodID: portion.food.id, foodName: portion.food.name]
 		}
 	}
 

@@ -28,6 +28,8 @@ class BootStrap {
 		new FoodMarshaller().register()
 		new PortionMarshaller().register()
 		new MealMarshaller().register()
+		new RecipeMarshaller().register()
+		new IngredientMarshaller().register()
     }
     def destroy = {
     }
