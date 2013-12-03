@@ -27,6 +27,7 @@ class NutritionService {
 	Portion createPortion(Food food, String description, Integer calories){
 		def portion = new Portion(description: description, calories: calories)
 		food.addToPortions(portion)
+		portion.validate()
 		portion
 	}
 
@@ -54,5 +55,22 @@ class NutritionService {
 		recipe.name = name
 		recipe.servings = servings
 		recipe.validate()
+	}
+
+	Ingredient createIngredient(Recipe recipe, Portion portion, Integer quantity){
+		def ingredient = new Ingredient(quantity: quantity)
+		recipe.addToIngredients(ingredient)
+		portion.addToRecipeIngredients(ingredient)
+		ingredient.validate()
+		ingredient
+	}
+
+	void deleteIngredient(Ingredient ingredient){
+		ingredient.delete()
+	}
+
+	void updateIngredient(Ingredient ingredient, Integer quantity){
+		ingredient.quantity = quantity
+		ingredient.validate()
 	}
 }

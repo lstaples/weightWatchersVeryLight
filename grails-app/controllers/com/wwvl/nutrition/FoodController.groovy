@@ -111,9 +111,9 @@ class FoodController {
 			render pc.errors as JSON
 		}
 
-		def food = Food.load(pc.foodID)
+		def food = Food.get(pc.foodID)
 		if(!food){
-			render (status: 404, text: "Food Not Found")
+			render (status: 400, text: "Food Not Found")
 			return
 		}
 
@@ -127,7 +127,7 @@ class FoodController {
 	}
 
 	def deletePortion(Integer id){
-		def portion = Portion.load(id)
+		def portion = Portion.get(id)
 		if(!portion){
 			render (status: 404, text: "Portion Not Found")
 			return

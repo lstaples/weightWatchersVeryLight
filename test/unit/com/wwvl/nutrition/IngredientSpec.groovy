@@ -27,9 +27,9 @@ class IngredientSpec extends Specification {
 		ingredient.validate()
 	}
 
-	void "test calories must be positive int"(){
+	void "test calories must be positive int or 0"(){
 		when:
-		ingredient.calories = 0
+		ingredient.calories = -1
 		then:
 		!ingredient.validate()
 

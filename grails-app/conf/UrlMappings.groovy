@@ -41,6 +41,16 @@ class UrlMappings {
 			action = [GET: "showRecipe", POST: "updateRecipe", DELETE: "deleteRecipe"]
 		}
 
+		"/recipe/$recipeID/ingredient"(controller: "Recipe", parseRequest: true) {
+			action = [POST: "createIngredient"]
+		}
+
+		"/recipe/$recipeID/ingredient/$id"(controller: "Recipe", parseRequest: true) {
+			action = [POST: "updateIngredient", DELETE: "deleteIngredient"]
+		}
+
+
+
         "/"(view:"/index")
         "500"(view:'/error')
 	}
