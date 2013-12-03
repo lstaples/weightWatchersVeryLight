@@ -27,6 +27,7 @@ class BootStrap {
 		new LogEntryMarshaller().register()
 		new FoodMarshaller().register()
 		new PortionMarshaller().register()
+		new MealMarshaller().register()
     }
     def destroy = {
     }

@@ -23,4 +23,20 @@ class NutritionService {
 		food.name = name
 		food.validate()
 	}
+
+	Portion createPortion(Food food, String description, Integer calories){
+		def portion = new Portion(description: description, calories: calories)
+		food.addToPortions(portion)
+		portion
+	}
+
+	void deletePortion(Portion portion){
+		portion.delete()
+	}
+
+	void updatePortion(Portion portion, String description, Integer calories) {
+		portion.description = description
+		portion.calories = calories
+		portion.validate()
+	}
 }

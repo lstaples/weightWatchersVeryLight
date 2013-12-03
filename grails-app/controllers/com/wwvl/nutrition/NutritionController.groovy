@@ -82,7 +82,6 @@ class NutritionController{
 		}
 		NutritionService.deleteFood(food);
 		render (status: 204)
-
 	}
 
 	def updateFood(FoodCommand fc){
@@ -106,6 +105,71 @@ class NutritionController{
 		render(status: 204)
 	}
 
+	def createPortion(PortionCommand pc){
+		if(pc.hasErrors()){
+			response.status = 400
+			render pc.errors as JSON
+		}
+
+		def food = Food.load(pc.foodID)
+		if(!food){
+			render (status: 404, text: "Food Not Found")
+			return
+		}
+
+		def portion = NutritionService.createPortion(food, pc.description, pc.calories)
+		if(portion.hasErrors()){
+			response.status = 500
+			render portion.errors as JSON
+		}
+
+		render portion as JSON
+	}
+
+	def deletePortion(Integer id){
+		def portion = Portion.load(id)
+		if(!portion){
+			render (status: 404, text: "Portion Not Found")
+			return
+		}
+
+		if(portion.recipeIngredients) {
+			render (status: 404, text: "Portion cannot be deleted because it belongs to at least 1 recipe")
+			return
+		}
+
+		if(portion.logEntries) {
+			render (status: 404, text: "Portion cannot be deleted because it belongs to at least 1 log entry")
+			return
+		}
+		NutritionService.deletePortion(portion);
+		render (status: 204)
+	}
+
+	def updatePortion(PortionCommand pc){
+		if(pc.hasErrors()){
+			response.status = 400
+			render pc.errors as JSON
+		}
+
+		def portion= Portion.get(pc.id)
+		if(!portion){
+			render (status: 404, text: "Portion Not Found")
+			return
+		}
+
+		NutritionService.updatePortion(portion, pc.description, pc.calories)
+		if(portion.hasErrors()){
+			response.status = 500
+			render portion.errors as JSON
+		}
+		render(status: 204)
+	}
+
+	def listMeals(){
+		render Meal.values() as JSON
+	}
+
 }
 
 class FoodCommand {
@@ -124,9 +188,11 @@ class PortionCommand{
 	Integer id
 	String description
 	Integer calories
+	Integer foodID
 
 	static constraints = {
 		importFrom Portion
 		id nullable: true
+		foodID nullable: true
 	}
 }
