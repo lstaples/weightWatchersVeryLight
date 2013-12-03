@@ -49,6 +49,22 @@ class UrlMappings {
 			action = [POST: "updateIngredient", DELETE: "deleteIngredient"]
 		}
 
+		"/foodLog"(controller: "FoodLog", parseRequest: true) {
+			action = [POST: "create"]
+		}
+
+		"/foodLog/list/$date"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "list"]
+		}
+
+		"/foodLog/summary"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "summary"]
+		}
+
+		"/foodLog/$id"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "show", POST: "update", DELETE: "delete"]
+		}
+
 
 
         "/"(view:"/index")

@@ -19,7 +19,7 @@ grails.config.locations = [
 
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
-grails.databinding.dateFormats = ['MM/dd/yyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z’"]
+grails.databinding.dateFormats = ['MM/dd/yyyy','MM-dd-yyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z’"]
 
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)

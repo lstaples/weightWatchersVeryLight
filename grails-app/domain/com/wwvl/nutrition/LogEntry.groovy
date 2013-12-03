@@ -25,4 +25,7 @@ abstract class LogEntry {
 		date.clearTime()
 		dateEaten = date
 	}
+
+	abstract String getType()
+	abstract String getName()
 }

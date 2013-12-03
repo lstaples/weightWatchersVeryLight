@@ -7,4 +7,12 @@ class FoodLogEntry extends LogEntry{
 	static mapping = {
 		portion column: 'portionID'
 	}
+
+	String getType(){
+		"Food"
+	}
+
+	String getName(){
+		portion.food.name
+	}
 }

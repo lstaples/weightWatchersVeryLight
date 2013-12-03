@@ -8,4 +8,12 @@ class RecipeLogEntry extends LogEntry {
 	static mapping = {
 		recipe column: 'recipeID'
 	}
+
+	String getType(){
+		"Recipe"
+	}
+
+	String getName(){
+		recipe.name
+	}
 }
