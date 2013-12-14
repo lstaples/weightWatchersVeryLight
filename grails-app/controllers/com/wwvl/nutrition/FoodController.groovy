@@ -2,7 +2,6 @@ package com.wwvl.nutrition
 
 import com.wwvl.auth.User
 import grails.converters.JSON
-import grails.validation.Validateable
 
 class FoodController {
 
@@ -183,7 +182,7 @@ class FoodCommand {
 	}
 
 }
-@Validateable
+
 class PortionCommand{
 	Integer id
 	String description

@@ -1,5 +1,6 @@
 import com.wwvl.nutrition.*
 import com.wwvl.auth.User
+import com.wwvl.MarshallerConfigurer
 
 class BootStrap {
 
@@ -23,13 +24,9 @@ class BootStrap {
 				def ingredient = new Ingredient(calories: 150, quantity: 3, portion: portion3, recipe: recipe).save()
 			}
 		}
-		new com.wwvl.weight.LogEntryMarshaller().register()
-		new FoodMarshaller().register()
-		new PortionMarshaller().register()
-		new MealMarshaller().register()
-		new RecipeMarshaller().register()
-		new IngredientMarshaller().register()
-		new LogEntryMarshaller().register()
+
+		//registers marshallers for our domain objects
+		new MarshallerConfigurer().configure()
     }
     def destroy = {
     }

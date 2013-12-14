@@ -49,7 +49,7 @@ class FoodLogController {
 			}
 			order("dateEaten","asc")
 		}
-		LinkedHashMap<LogEntryDailySummary> dailySummaries = LogEntryDailySummary.computeAveragesFromSet(fc.startDate,fc.endDate,logs)
+		def dailySummaries = LogEntryDailySummary.computeAveragesFromSet(fc.startDate,fc.endDate,logs)
 		def result = dailySummaries.values().collect{LogEntryDailySummary summary ->
 			[calories: summary.calories
 			,dateEaten: summary.dateEaten.format("MM/dd/yyyy")

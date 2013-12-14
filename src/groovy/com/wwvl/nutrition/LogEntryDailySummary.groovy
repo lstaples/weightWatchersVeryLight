@@ -8,7 +8,7 @@ class LogEntryDailySummary {
 
 	static def computeAveragesFromSet(Date startDate,Date endDate, def set){
 		def interval = endDate - startDate - 1
-		def result = new LinkedHashMap<LogEntryDailySummary>()
+		def result = [:]
 
 		//build a logEntry for each day in the range
 		(0..interval).each{
@@ -21,7 +21,7 @@ class LogEntryDailySummary {
 		set.each{result[it[1].format("MM/dd/yyyy")].calories = it[0]}
 
 		def RollingFive = 0
-		def Rollingten = 0
+		def RollingTen = 0
 		LinkedList<Integer> fiveDayWindow = new LinkedList<Integer>();
 		LinkedList<Integer> tenDayWindow = new LinkedList<Integer>();
 
@@ -36,11 +36,11 @@ class LogEntryDailySummary {
 			summary.fiveDayAvg = RollingFive / Math.min(5,fiveDayWindow.size())
 
 			tenDayWindow.add(summary.calories)
-			Rollingten += summary.calories
+			RollingTen += summary.calories
 			if(tenDayWindow.size() == 11){
-				Rollingten -= tenDayWindow.removeFirst()
+				RollingTen -= tenDayWindow.removeFirst()
 			}
-			summary.tenDayAvg = Rollingten / Math.min(10,tenDayWindow.size())
+			summary.tenDayAvg = RollingTen / Math.min(10,tenDayWindow.size())
 		}
 
 		result
