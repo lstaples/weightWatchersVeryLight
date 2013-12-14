@@ -19,9 +19,11 @@ class BootStrap {
 				def food3 = new Food(name: 'Chicken Stock', user: user).save()
 				def portion3 = new Portion(description: 'cup' ,food: food3, calories: 50).save()
 
-				def recipe = new Recipe(user: user, calories: 150, servings: 3, name: 'chicken soup').save()
+				def recipe = new Recipe(user: user, calories: 450, servings: 3, name: 'chicken soup').save()
 
 				def ingredient = new Ingredient(calories: 150, quantity: 3, portion: portion3, recipe: recipe).save()
+
+				def logEntry2 = new RecipeLogEntry(recipe: recipe, dateEaten: new Date(), quantity: 1, calories: 150, user: user, meal: Meal.dinner).save()
 			}
 		}
 

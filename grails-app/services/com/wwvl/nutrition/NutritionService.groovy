@@ -73,4 +73,18 @@ class NutritionService {
 		ingredient.quantity = quantity
 		ingredient.validate()
 	}
+
+	void deleteLog(LogEntry logEntry){
+		logEntry.delete()
+	}
+
+	void saveLogEntry(LogEntry logEntry, Date dateEaten, Meal meal, Integer quantity, Integer calories,User user){
+		logEntry.dateEaten = dateEaten
+		logEntry.meal = meal
+		logEntry.quantity = quantity
+		logEntry.calories = calories
+		logEntry.user = user
+		logEntry.save()
+	}
+
 }

@@ -21,6 +21,10 @@ class UrlMappings {
 			action = [POST: "create"]
 		}
 
+		"/foodLog/$id"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "show", POST: "update", DELETE: "delete"]
+		}
+
 		"/foodLog/list/$date"(controller: "FoodLog", parseRequest: true) {
 			action = [GET: "list"]
 		}
@@ -29,9 +33,6 @@ class UrlMappings {
 			action = [GET: "summary"]
 		}
 
-		"/foodLog/$id"(controller: "FoodLog", parseRequest: true) {
-			action = [GET: "show", POST: "update", DELETE: "delete"]
-		}
 
 		"/login/$action?/$id?"(controller: "Login") {
 		}

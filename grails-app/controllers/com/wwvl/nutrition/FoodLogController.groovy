@@ -59,23 +59,108 @@ class FoodLogController {
 		render result as JSON
 	}
 
-	def create() {}
+	def create(LogEntryCommand lc) {
+		if(lc.hasErrors()){
+			response.status = 400
+			render lc.errors as JSON
+		}
 
-	def show() {
+		User user = User.load(springSecurityService.principal.id)
+		def recipe
+		def portion
+		LogEntry logEntry
+		if(lc.recipeID){
+			recipe = Recipe.findByUserAndId(user,lc.recipeID)
+			logEntry =  new RecipeLogEntry(recipe: recipe)
+		}
+		if(lc.portionID){
+			portion = Portion.executeQuery(' from Portion p where p.food.user = ? and p.id = ?', [user,lc.portionID])[0]
+			logEntry =  new FoodLogEntry(portion: portion)
+		}
+
+		if(!portion && ! recipe){
+			render (status: 400, text: "Valid portion or recipe must be supplied")
+			return
+		}
+
+		NutritionService.saveLogEntry(logEntry,lc.dateEaten, lc.meal, lc.quantity, lc.calories,user)
+
+		render logEntry as JSON
+
 	}
 
-	def delete() {}
+	def show(Integer id) {
+		User user = User.load(springSecurityService.principal.id)
+		def logEntry= LogEntry.findByIdAndUser(id,user)
+		if(!logEntry){
+			render (status: 404, text: "Log Entry Not Found")
+			return
+		}
 
-	def update() {}
+		render logEntry as JSON
+	}
+
+	def delete(Integer id) {
+		User user = User.load(springSecurityService.principal.id)
+		def logEntry = LogEntry.findByIdAndUser(id,user)
+		if(!logEntry){
+			render (status: 404, text: "Log Entry Not Found")
+			return
+		}
+		NutritionService.deleteLog(logEntry)
+		render(status: 204)
+	}
+
+	def update(LogEntryCommand lc) {
+		if(lc.hasErrors()){
+			response.status = 400
+			render lc.errors as JSON
+		}
+
+		User user = User.load(springSecurityService.principal.id)
+		def recipe
+		def portion
+		LogEntry logEntry = LogEntry.findByUserAndId(user,lc.id)
+		if(!logEntry){
+			response.status = 404
+			render "Log Entry not found"
+			return
+		}
+		if(logEntry.getType() == 'Recipe'){
+			recipe = Recipe.findByUserAndId(user,lc.recipeID)
+			if(!recipe){
+				response.status = 400
+				render "Recipe not found"
+				return
+			}
+			logEntry.recipe = recipe
+		}
+
+		if(logEntry.getType() == 'Food'){
+			portion = Portion.executeQuery(' from Portion p where p.food.user = ? and p.id = ?', [user,lc.portionID])[0]
+			if(!portion){
+				response.status = 400
+				render "Portion not found"
+				return
+			}
+			logEntry.portion = portion
+		}
+
+		NutritionService.saveLogEntry(logEntry,lc.dateEaten, lc.meal, lc.quantity, lc.calories,user)
+
+		render(status: 204)
+
+	}
 }
 
 class LogEntryCommand{
 	Integer id
 	Integer recipeID
-	Integer portionID
+	Long portionID
 	Date dateEaten
 	Meal meal
 	Integer quantity
+	Integer calories
 
 	static constraints = {
 		importFrom LogEntry
