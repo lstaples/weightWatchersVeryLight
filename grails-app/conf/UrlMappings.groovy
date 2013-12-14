@@ -2,19 +2,6 @@ class UrlMappings {
 
 	static mappings = {
 
-		"/$controller/$action?/$id?(.${format})?"{
-            constraints {
-                // apply constraints here
-            }
-        }
-
-		"/weight"(controller: "WeightLog", parseRequest: true) {
-			action = [GET: "list", POST: "create"]
-		}
-		"/weight/$id"(controller: "WeightLog", parseRequest: true) {
-			action = [GET: "show", POST: "update", DELETE: "delete"]
-		}
-
 		"/food"(controller: "Food", parseRequest: true) {
 			action = [GET: "listFood", POST: "createFood"]
 		}
@@ -29,6 +16,32 @@ class UrlMappings {
 		"/food/$foodID/portion/$id"(controller: "Food", parseRequest: true) {
 			action = [POST: "updatePortion", DELETE: "deletePortion"]
 		}
+
+		"/foodLog"(controller: "FoodLog", parseRequest: true) {
+			action = [POST: "create"]
+		}
+
+		"/foodLog/list/$date"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "list"]
+		}
+
+		"/foodLog/summary"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "summary"]
+		}
+
+		"/foodLog/$id"(controller: "FoodLog", parseRequest: true) {
+			action = [GET: "show", POST: "update", DELETE: "delete"]
+		}
+
+		"/login/$action?/$id?"(controller: "Login") {
+		}
+
+		"/logout/$action?/$id?"(controller: "Logout") {
+		}
+
+		"/quickLogon/$action?/$id?"(controller: "QuickLogon") {
+		}
+
 
 		"/meals"(controller: "Food", parseRequest: true) {
 			action = [GET: "listMeals"]
@@ -49,19 +62,10 @@ class UrlMappings {
 			action = [POST: "updateIngredient", DELETE: "deleteIngredient"]
 		}
 
-		"/foodLog"(controller: "FoodLog", parseRequest: true) {
-			action = [POST: "create"]
+		"/weight"(controller: "WeightLog", parseRequest: true) {
+			action = [GET: "list", POST: "create"]
 		}
-
-		"/foodLog/list/$date"(controller: "FoodLog", parseRequest: true) {
-			action = [GET: "list"]
-		}
-
-		"/foodLog/summary"(controller: "FoodLog", parseRequest: true) {
-			action = [GET: "summary"]
-		}
-
-		"/foodLog/$id"(controller: "FoodLog", parseRequest: true) {
+		"/weight/$id"(controller: "WeightLog", parseRequest: true) {
 			action = [GET: "show", POST: "update", DELETE: "delete"]
 		}
 
