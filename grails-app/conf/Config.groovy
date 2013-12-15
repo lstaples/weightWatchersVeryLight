@@ -135,9 +135,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+	'/**/favicon.ico':                ['permitAll'],
+	'/dbconsole/**':                  ['permitAll'],  //only available in dev so leave it open
 ]
 
-grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.adh.errorPage  = null
+grails.plugin.springsecurity.adh.ajaxErrorPage = null
+
 

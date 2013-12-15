@@ -2,7 +2,9 @@ package com.wwvl.weight
 
 import com.wwvl.auth.User
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['ROLE_USER'])
 class WeightLogController {
 
 	def springSecurityService
