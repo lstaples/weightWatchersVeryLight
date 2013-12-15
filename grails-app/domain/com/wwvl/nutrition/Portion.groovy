@@ -15,4 +15,10 @@ class Portion {
 	static mapping = {
 		food column: 'foodID'
 	}
+
+	void setCalories(Integer _calories){
+		calories = _calories
+		recipeIngredients.each{Ingredient i -> i.reTotalCalories()}
+		logEntries.each {FoodLogEntry l -> l.reTotalCalories()}
+	}
 }

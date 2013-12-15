@@ -15,4 +15,8 @@ class FoodLogEntry extends LogEntry{
 	String getName(){
 		portion.food.name
 	}
+
+	void reTotalCalories(){
+		calories = (portion?.calories ?: 0) * quantity
+	}
 }

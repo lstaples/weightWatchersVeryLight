@@ -15,4 +15,11 @@ class Ingredient {
 		recipe column: 'recipeID'
 		portion column: 'portionID'
 	}
+
+	void reTotalCalories(){
+		def currentCalories = calories
+		calories = (portion.calories ?: 0) * quantity ?:0
+		if(recipe)
+			recipe.calories +=  calories - currentCalories
+	}
 }

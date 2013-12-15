@@ -85,7 +85,7 @@ class FoodLogController {
 			return
 		}
 
-		NutritionService.saveLogEntry(logEntry,lc.dateEaten, lc.meal, lc.quantity, lc.calories,user)
+		NutritionService.saveLogEntry(logEntry,lc.dateEaten, lc.meal, lc.quantity,user)
 
 		render logEntry as JSON
 
@@ -148,7 +148,7 @@ class FoodLogController {
 			logEntry.portion = portion
 		}
 
-		NutritionService.saveLogEntry(logEntry,lc.dateEaten, lc.meal, lc.quantity, lc.calories,user)
+		NutritionService.saveLogEntry(logEntry,lc.dateEaten, lc.meal, lc.quantity,user)
 
 		render(status: 204)
 
@@ -162,7 +162,6 @@ class LogEntryCommand{
 	Date dateEaten
 	Meal meal
 	Integer quantity
-	Integer calories
 
 	static constraints = {
 		importFrom LogEntry

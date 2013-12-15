@@ -5,7 +5,7 @@ abstract class LogEntry {
 	Date dateEaten
 	Meal meal
 	Integer quantity
-	Integer calories
+	Integer calories = 0
 
 	static belongsTo = [user:User]
 
@@ -26,6 +26,12 @@ abstract class LogEntry {
 		dateEaten = date
 	}
 
+	void setQuantity(Integer _quantity){
+		quantity = _quantity
+		reTotalCalories()
+	}
+
 	abstract String getType()
 	abstract String getName()
+	abstract void reTotalCalories()
 }

@@ -61,16 +61,19 @@ class NutritionService {
 		def ingredient = new Ingredient(quantity: quantity)
 		recipe.addToIngredients(ingredient)
 		portion.addToRecipeIngredients(ingredient)
+		ingredient.reTotalCalories()
 		ingredient.validate()
 		ingredient
 	}
 
 	void deleteIngredient(Ingredient ingredient){
+		ingredient.recipe.calories -= ingredient.calories
 		ingredient.delete()
 	}
 
 	void updateIngredient(Ingredient ingredient, Integer quantity){
 		ingredient.quantity = quantity
+		ingredient.reTotalCalories()
 		ingredient.validate()
 	}
 
@@ -78,12 +81,12 @@ class NutritionService {
 		logEntry.delete()
 	}
 
-	void saveLogEntry(LogEntry logEntry, Date dateEaten, Meal meal, Integer quantity, Integer calories,User user){
+	void saveLogEntry(LogEntry logEntry, Date dateEaten, Meal meal, Integer quantity,User user){
 		logEntry.dateEaten = dateEaten
 		logEntry.meal = meal
 		logEntry.quantity = quantity
-		logEntry.calories = calories
 		logEntry.user = user
+		logEntry.reTotalCalories()
 		logEntry.save()
 	}
 

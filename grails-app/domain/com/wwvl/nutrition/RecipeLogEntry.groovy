@@ -16,4 +16,11 @@ class RecipeLogEntry extends LogEntry {
 	String getName(){
 		recipe.name
 	}
+
+	void reTotalCalories(){
+		if(!recipe)
+			calories = 0
+		else
+			calories = Math.floor((recipe.calories / recipe.servings) * quantity)
+	}
 }

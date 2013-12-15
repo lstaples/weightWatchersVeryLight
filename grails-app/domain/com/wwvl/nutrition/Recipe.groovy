@@ -20,4 +20,14 @@ class Recipe {
 		user column: 'userID'
 	}
 
+	void setCalories(Integer _calories){
+		calories = _calories
+		logEntries.each {LogEntry l -> l.reTotalCalories()}
+	}
+
+	void setServings(Integer _servings){
+		servings = _servings
+		logEntries.each {LogEntry l -> l.reTotalCalories()}
+	}
+
 }

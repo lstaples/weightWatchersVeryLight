@@ -2,7 +2,9 @@ package com.wwvl.nutrition
 
 import com.wwvl.auth.User
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['ROLE_USER'])
 class RecipeController {
 
 	def springSecurityService
