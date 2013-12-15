@@ -1,5 +1,5 @@
 import com.wwvl.nutrition.*
-import com.wwvl.auth.User
+import com.wwvl.auth.*
 import com.wwvl.MarshallerConfigurer
 
 class BootStrap {
@@ -8,6 +8,13 @@ class BootStrap {
 		environments {
 			development {
 				def user = new User (username: 'user',password: 'password').save()
+
+				def endUserRole = new Role(authority: 'ROLE_USER').save()
+				def adminRole = new Role(authority: 'ROLE_ADMIN').save()
+
+				new UserRole(user: user, role: endUserRole).save()
+				new UserRole(user: user, role: adminRole).save()
+
 				def food = new Food(name: 'deletable',user: user).save()
 				def portion = new Portion(description: 'alsoDeletable' ,food: food, calories: 10).save()
 

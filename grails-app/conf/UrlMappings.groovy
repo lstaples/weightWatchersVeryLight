@@ -70,9 +70,17 @@ class UrlMappings {
 			action = [GET: "show", POST: "update", DELETE: "delete"]
 		}
 
+		"/user/$action?/$id?"(controller: "User") {
+		}
+
+		"/role/$action?/$id?"(controller: "Role") {
+		}
+
+		"/userRole/$action?/$id?"(controller: "UserRole") {
+		}
 
 
-        "/"(view:"/index")
+		"/"(view:"/index")
         "500"(view:'/error')
 	}
 }
