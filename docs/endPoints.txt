@@ -1,0 +1,232 @@
+----------------
+Resource : Authentication
+----------------
+action: authenticate
+URI: j_spring_security_check
+Allowed Method(): post
+return status code: 200
+Sample Input: j_username=user&j_password=password
+Sample Output: {sucess:true, username: 'user'}
+
+note: all other endpoints will not complete successfully if not authenticated
+
+----------------
+Resource : Meals
+----------------
+
+action: list
+URI: meals
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: [{"name":"breakfast"},{"name":"lunch"},{"name":"dinner"},{"name":"snacks"}]
+
+----------------
+Resource : Weight Log
+----------------
+action: create
+URI: weight/
+Allowed Method(): post
+return status code: 200
+Sample Input: {dateWeighed: '12/14/2013',weight:110}
+Sample Output: {"logEntryID":2}
+
+action: update
+URI: weight/$ID
+Allowed Method(): post
+return status code: 204
+Sample Input: {dateWeighed: '12/14/2013',weight:110, id:1}
+Sample Output: 
+
+action: delete
+URI: weight/$ID
+Allowed Method(): delete
+return status code: 204
+Sample Input: 
+Sample Output: 
+
+action: list
+URI: weight/
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: [{"id":1,"dateWeighed":"12/14/2013","weight":110},{"id":2,"dateWeighed":"12/15/2013","weight":115}]
+
+action: show
+URI: weight/$ID
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: {"id":1,"dateWeighed":"12/14/2013","weight":110}
+
+----------------
+Resource : Food Log
+----------------
+
+action: create
+URI: foodLog/
+Allowed Method(): post
+return status code: 200
+Sample Input: {dateEaten: '12/17/2013' ,recipeID: 1,portionID:null,meal: 'dinner',quantity : 1}
+Sample Output: {"id":3,"name":"chicken soup","type":"Recipe","dateEaten":"12/17/2013","quantity":1,"calories":45,"meal":"dinner"}
+
+action: update
+URI: foodLog/$ID
+Allowed Method(): post
+return status code: 204
+Sample Input: {id:3,dateEaten: '12/14/2013',recipeID: 1,portionID:null,meal: 'dinner',quantity : 1}
+Sample Output: 
+
+action: delete
+URI: foodLog/$ID
+Allowed Method(): delete
+return status code: 204
+Sample Input: 
+Sample Output: 
+
+action: show
+URI: foodLog/$ID
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: {"id":1,"name":"salad","type":"Food","dateEaten":"12/14/2013","quantity":1,"calories":25,"meal":"breakfast"}
+
+action: list
+URI: foodLog/$DATE?meal=$MEAL (uri param is optional)
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: [{"id":1,"name":"salad","type":"Food","dateEaten":"12/14/2013","quantity":1,"calories":10,"meal":"breakfast"},{"id":2,"name":"chicken soup","type":"Recipe","dateEaten":"12/14/2013","quantity":2,"calories":90,"meal":"dinner"}]
+
+action: summary
+URI: foodLog/summary?startDate=$STARTDATE&endDate=$ENDDATE (uri params are both optional)
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: [{"calories":155, "dateEaten":"12/14/2013", "fiveDayAvg":155,"tenDayAvg":155}, {"calories":0,"dateEaten":"12/13/2013","fiveDayAvg":77.5, "tenDayAvg":77.5}
+
+----------------
+Resource : Food 
+----------------
+action: create
+URI: food/
+Allowed Method(): post
+return status code: 200
+Sample Input: {name : 'ice cream' ,portion : {description: 'scoop', calories:500}}
+Sample Output: {"id":4,"name":"ice cream","portions":[{"id":4,"description":"scoop","calories":500,"foodID":4,"foodName":"ice cream"}]}
+
+action: update
+URI: food/$ID
+Allowed Method(): post
+return status code: 204
+Sample Input: {id: 4, name : 'vanilla ice cream'}
+Sample Output: 
+
+action: delete
+URI: food/$ID
+Allowed Method(): delete
+return status code: 204
+Sample Input: 
+Sample Output: 
+
+action: list
+URI: food/
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: [{"id":2,"name":"salad","portions":[{"id":2,"description":"bowl","calories":20,"foodID":2,"foodName":"salad"}]}]
+
+action: show
+URI: food/$ID
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: {"id":2,"name":"salad","portions":[{"id":2,"description":"bowl","calories":20,"foodID":2,"foodName":"salad"}]}
+
+----------------
+Resource : Portion
+----------------
+action: create
+URI: food/$FOODID/portion
+Allowed Method(): post
+return status code: 200
+Sample Input: {description: 'tablespoon', calories : 25, foodID : 1}
+Sample Output: {"id":5,"description":"tablespoon","calories":25,"foodID":1,"foodName":"sugar"}
+
+action: update
+URI: food/$FOODID/portion/$ID
+Allowed Method(): post
+return status code: 204
+Sample Input: {description: 'tablespoon', calories : 35, id : 5}
+Sample Output: 
+
+action: delete
+URI: food/$FOODID/portion/$ID
+Allowed Method(): delete
+return status code: 204
+Sample Input: 
+Sample Output: 
+
+----------------
+Resource : Recipe
+----------------
+action: create
+URI: recipe/
+Allowed Method(): post
+return status code: 200
+Sample Input: {name : 'lasagne',servings: 8}
+Sample Output: {"id":2,"name":"lasagne","servings":8,"calories":0,"ingredients":null}
+
+action: update
+URI: recipe/$ID
+Allowed Method(): post
+return status code: 204
+Sample Input: {id: 2, name : 'lasagne',servings: 8}
+Sample Output: 
+
+action: delete
+URI: recipe/$ID
+Allowed Method(): delete
+return status code: 204
+Sample Input: 
+Sample Output: 
+
+action: list
+URI: recipe/
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: [{"id":1,"name":"chicken soup","servings":4,"calories":150,"ingredients":[{"id":1,"quantity":3,"calories":150,"portion":{"id":3,"description":"cup","calories":50,"foodID":3,"foodName":"Chicken Stock"}}]},{"id":2,"name":"lasagne","servings":10,"calories":0,"ingredients":[]}]
+
+action: show
+URI: recipe/$ID
+Allowed Method(): get
+return status code: 200
+Sample Input: 
+Sample Output: {"id":1,"name":"chicken soup","servings":4,"calories":150,"ingredients":[{"id":1,"quantity":3,"calories":150,"portion":{"id":3,"description":"cup","calories":50,"foodID":3,"foodName":"Chicken Stock"}}]}
+
+----------------
+Resource : Ingredient
+----------------
+
+action: create
+URI: recipe/$RECIPEID/ingredient
+Allowed Method(): post
+return status code: 200
+Sample Input: {quantity: 3,portionID : 1,recipeID: 1}
+Sample Output: {"id":2,"quantity":3,"calories":30,"portion":{"id":1,"description":"cup","calories":10,"foodID":1,"foodName":"sugar"}}
+
+action: update
+URI: recipe/$RECIPEID/ingredientportion/$ID
+Allowed Method(): post
+return status code: 204
+Sample Input: {id: 1, quantity: 6}
+Sample Output: 
+
+
+action: delete
+URI: recipe/$RECIPEID/ingredient/$ID
+Allowed Method(): delete
+return status code: 204
+Sample Input: 
+Sample Output: 
