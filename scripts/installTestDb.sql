@@ -56,14 +56,14 @@ CREATE TABLE recipe(id int primary key identity
                     ,version int
                     ,userID int references users(id)
                     ,name varchar(255) not null
-                    ,calories int not null CHECK (calories >0)
+                    ,calories int not null CHECK (calories >=0)
                     ,servings int not null CHECK (servings >0))
 
 CREATE TABLE ingredient(id int primary key identity
                        ,version int
                        ,recipeID int references recipe(id) not null 
                        ,portionID int references portion(id) not null 
-                       ,calories int not null CHECK (calories >0)
+                       ,calories int not null CHECK (calories >=0)
                        ,quantity int not null CHECK (quantity >0)
                        ) 
 
@@ -73,7 +73,7 @@ CREATE TABLE calorieIntakeLogEntry(id int primary key identity
                      ,dateEaten datetime
                      ,meal varchar(10) not null
                      ,quantity int not null
-                     ,calories int not null CHECK (calories >0))
+                     ,calories int not null CHECK (calories >=0))
                      
 CREATE TABLE foodLogEntry(id int primary key
                           ,version int
