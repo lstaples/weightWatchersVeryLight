@@ -50,12 +50,12 @@ grails.project.dependency.resolution = {
 		runtime 'net.sourceforge.jtds:jtds:1.2.6'
 
 		//resolves error with forked jvm
-		build "org.fusesource.jansi:jansi:1.11"
+		//build "org.fusesource.jansi:jansi:1.11"
 	}
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.42"
+        build ":tomcat:7.0.47"
 
 
         // plugins for the compile step
@@ -64,7 +64,7 @@ grails.project.dependency.resolution = {
 		compile ":spring-security-core:2.0-RC2"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.3" // or ":hibernate4:4.1.11.2"
+        runtime ":hibernate:3.6.10.6" // or ":hibernate4:4.1.11.2"
         runtime ":database-migration:1.3.8"
         runtime ":jquery:1.10.2"
         runtime ":resources:1.2.1"
