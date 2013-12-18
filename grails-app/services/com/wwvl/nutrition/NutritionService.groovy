@@ -62,7 +62,7 @@ class NutritionService {
 		recipe.addToIngredients(ingredient)
 		portion.addToRecipeIngredients(ingredient)
 		ingredient.reTotalCalories()
-		ingredient.validate()
+		ingredient.save()
 		ingredient
 	}
 

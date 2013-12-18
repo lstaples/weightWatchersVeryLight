@@ -87,13 +87,13 @@ class RecipeController {
 		}
 
 		def recipe= Recipe.get(ic.recipeID)
-		if(!recipe){
+        if(!recipe){
 			render (status: 400, text: "Recipe Not Found")
 			return
 		}
 
 		def portion= Portion.get(ic.portionID)
-		if(!recipe){
+        if(!portion){
 			render (status: 400, text: "Portion Not Found")
 			return
 		}
