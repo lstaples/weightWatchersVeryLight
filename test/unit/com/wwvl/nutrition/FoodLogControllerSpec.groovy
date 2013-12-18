@@ -18,7 +18,6 @@ class FoodLogControllerSpec extends Specification {
         SessionService sessionService = Mock()
         sessionService.getLoggedInUser() >> testData.user
         controller.sessionService = sessionService
-
     }
 
     def cleanup() {
