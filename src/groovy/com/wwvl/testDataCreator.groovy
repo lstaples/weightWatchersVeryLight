@@ -36,7 +36,9 @@ class testDataCreator {
 
 		def recipeLogEntry = new RecipeLogEntry(recipe: chickenSoup, dateEaten: new Date(), quantity: 1, user: user, meal: Meal.dinner)
 		recipeLogEntry.reTotalCalories()
+
 		recipeLogEntry.save()
+
 		new NutritionTestData(user: user, bread: bread, sliceOfBread: sliceOfBread, salad: salad
 		,bowlOfSalad: bowlOfSalad,foodLogEntry: foodLogEntry, chickenStock: chickenStock
 		,cupOfChickenStock:cupOfChickenStock,chickenSoup:chickenSoup,soupBase:soupBase

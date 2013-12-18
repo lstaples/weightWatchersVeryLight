@@ -11,6 +11,7 @@ class RecipeLogEntrySpec extends Specification {
     def setup() {
 		User user = Mock()
 		Recipe recipe = Mock()
+        recipe.caloriesPerServing() >> 1
 		recipeLogEntry =  new RecipeLogEntry(user: user, recipe: recipe, dateEaten: new Date(), meal: Meal.snacks, quantity: 1, calories: 10)
     }
 

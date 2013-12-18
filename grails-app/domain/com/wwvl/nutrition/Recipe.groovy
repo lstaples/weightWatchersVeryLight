@@ -30,4 +30,11 @@ class Recipe {
 		logEntries.each {LogEntry l -> l.reTotalCalories()}
 	}
 
+    Integer caloriesPerServing(){
+        if(!servings)
+            return 0
+        else
+            return Math.floor((calories ?: 0) / servings)
+    }
+
 }
