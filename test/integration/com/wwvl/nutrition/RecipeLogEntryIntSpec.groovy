@@ -16,8 +16,8 @@ class RecipeLogEntryIntSpec extends Specification {
 		def user = new User(username: 'admin',password: 'myPasswrord')
 		def recipe =  new Recipe(user: user, name: 'Cobb Salad', calories: 10, servings: 10).save()
 		def meal = Meal.snacks
-		def recipeLogEntry = new RecipeLogEntry(recipe: recipe, meal: meal, user: user,quantity: 10, calories: 10, dateEaten: new Date())
-
+		def recipeLogEntry = new RecipeLogEntry(recipe: recipe, meal: meal, user: user,quantity: 10, dateEaten: new Date())
+        recipeLogEntry.reTotalCalories()
 		then: "it persists without errors"
 		recipeLogEntry.save()
 	}

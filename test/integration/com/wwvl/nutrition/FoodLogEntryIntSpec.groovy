@@ -17,7 +17,9 @@ class FoodLogEntryIntSpec extends Specification {
 		def food = new Food(user: user, name: 'salad').save()
 		def portion = new Portion(food: food, description: 'bowl', calories: 10).save()
 		def meal = Meal.snacks
-		def foodLogentry = new FoodLogEntry(portion: portion, meal: meal, user: user,quantity: 10, calories: 10, dateEaten: new Date())
+		def foodLogentry = new FoodLogEntry(portion: portion, meal: meal, user: user,quantity: 10, dateEaten: new Date())
+        foodLogentry.reTotalCalories()
+
 
 		then: "it persists without errors"
 		foodLogentry.save()

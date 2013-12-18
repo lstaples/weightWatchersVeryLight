@@ -18,9 +18,9 @@ class RecipeLogEntry extends LogEntry {
 	}
 
 	void reTotalCalories(){
-		if(!recipe)
+		if(!recipe || !recipe.servings)
 			calories = 0
 		else
-			calories = Math.floor((recipe.calories / recipe.servings) * quantity)
+			calories = Math.floor((recipe.calories ?: 0 / recipe.servings) * quantity)
 	}
 }

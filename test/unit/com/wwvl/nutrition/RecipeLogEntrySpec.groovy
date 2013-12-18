@@ -35,13 +35,13 @@ class RecipeLogEntrySpec extends Specification {
 
 		when:
 		recipeLogEntry.quantity = 1
-		then:
+        then:
 		recipeLogEntry.validate()
 	}
 
-	void "test calories must be positive int"(){
+	void "test calories must be positive int or 0"(){
 		when:
-		recipeLogEntry.calories = 0
+		recipeLogEntry.calories = -1
 		then:
 		!recipeLogEntry.validate()
 
