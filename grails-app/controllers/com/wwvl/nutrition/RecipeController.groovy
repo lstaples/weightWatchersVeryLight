@@ -7,16 +7,16 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_USER'])
 class RecipeController {
 
-	def springSecurityService
+	def sessionService
 	def NutritionService
 
 	def listRecipe() {
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		render Recipe.findAllByUser(user) as JSON
 	}
 
 	def showRecipe(Integer id){
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def recipe= Recipe.findByIdAndUser(id,user)
 		if(!recipe){
 			render (status: 404, text: "Recipe Not Found")
@@ -33,7 +33,7 @@ class RecipeController {
 			render rc.errors as JSON
 		}
 
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def recipe = NutritionService.createRecipe(user, rc.name, rc.servings)
 
 		if(recipe.hasErrors()){
@@ -45,7 +45,7 @@ class RecipeController {
 	}
 
 	def deleteRecipe(Integer id){
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def recipe = Recipe.findByIdAndUser(id,user)
 		if(!recipe){
 			render (status: 404, text: "Recipe Not Found")
@@ -65,7 +65,7 @@ class RecipeController {
 			response.status = 400
 			render rc.errors as JSON
 		}
-		def user = User.load(springSecurityService.principal.id)
+		def user = sessionService.getLoggedInUser()
 
 		def recipe = Recipe.findByIdAndUser(rc.id,user)
 		if(!recipe){

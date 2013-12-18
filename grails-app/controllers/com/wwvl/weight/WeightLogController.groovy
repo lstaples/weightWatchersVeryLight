@@ -7,11 +7,11 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_USER'])
 class WeightLogController {
 
-	def springSecurityService
 	def WeightLogService
+    def sessionService
 
     def list(ListCommand lc) {
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		lc.resolveDates(user)
 		def logEntries = LogEntry.findAllByUserAndDateWeighedGreaterThanEqualsAndDateWeighedLessThanEquals(user,lc.startDate,lc.endDate)
 		render logEntries as JSON
@@ -24,7 +24,7 @@ class WeightLogController {
 
 		def logEntry = new LogEntry(logEntryCommand.getSimpleProperties())
 
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		logEntry.user = user
 
 		if(!WeightLogService.createLog(logEntry)){
@@ -37,7 +37,7 @@ class WeightLogController {
 	}
 
 	def show(Long id){
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def logEntry = LogEntry.findByIdAndUser(id,user)
 		if(!logEntry){
 			render (status: 404, text: "Weight Log Entry Not Found")
@@ -48,7 +48,7 @@ class WeightLogController {
 	}
 
 	def delete(Long id){
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def logEntry = LogEntry.findByIdAndUser(id,user)
 		if(!logEntry){
 			render (status: 404, text: "Weight Log Entry Not Found")
@@ -64,7 +64,7 @@ class WeightLogController {
 			response.status = 400
 			render logEntryCommand.errors as JSON
 		}
-		def user = User.load(springSecurityService.principal.id)
+		def user = sessionService.getLoggedInUser()
 		def logEntry = LogEntry.findByIdAndUser(logEntryCommand.id,user)
 		if(!logEntry){
 			render (status: 404, text: "Weight Log Entry Not Found")

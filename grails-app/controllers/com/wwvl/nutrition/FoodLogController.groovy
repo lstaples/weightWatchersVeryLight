@@ -7,7 +7,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_USER'])
 class FoodLogController {
 
-	def springSecurityService
+	def sessionService
 	def NutritionService
 
 	def list(FoodLogListCommand fc) {
@@ -15,7 +15,7 @@ class FoodLogController {
 			response.status = 400
 			render fc.errors as JSON
 		}
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def logs
 		if(fc.meal){
 			try{
@@ -39,7 +39,7 @@ class FoodLogController {
 			response.status = 400
 			render fc.errors as JSON
 		}
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		fc.resolveDates(user)
 		def logs = LogEntry.createCriteria().list{
 			eq("user",user)
@@ -67,7 +67,7 @@ class FoodLogController {
 			render lc.errors as JSON
 		}
 
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def recipe
 		def portion
 		LogEntry logEntry
@@ -92,7 +92,7 @@ class FoodLogController {
 	}
 
 	def show(Integer id) {
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def logEntry= LogEntry.findByIdAndUser(id,user)
 		if(!logEntry){
 			render (status: 404, text: "Log Entry Not Found")
@@ -103,7 +103,7 @@ class FoodLogController {
 	}
 
 	def delete(Integer id) {
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def logEntry = LogEntry.findByIdAndUser(id,user)
 		if(!logEntry){
 			render (status: 404, text: "Log Entry Not Found")
@@ -119,7 +119,7 @@ class FoodLogController {
 			render lc.errors as JSON
 		}
 
-		User user = User.load(springSecurityService.principal.id)
+		User user = sessionService.getLoggedInUser()
 		def recipe
 		def portion
 		LogEntry logEntry = LogEntry.findByUserAndId(user,lc.id)
